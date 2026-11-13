@@ -108,13 +108,25 @@
   .facts b{display:block;font-size:24px;color:var(--sea)}
   .facts span{font-size:13px;color:var(--muted)}
 
-  /* contact */
-  #contact{background:var(--sea);color:#fff;text-align:center}
-  #contact .sec-sub{color:#cfe6ea}
-  .contact-box{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-  .contact-box a{background:#fff;color:var(--sea);padding:14px 26px;border-radius:999px;font-weight:700;text-decoration:none}
-  .contact-box a.alt{background:transparent;color:#fff;border:2px solid #fff}
-  footer{text-align:center;padding:24px;font-size:13px;color:var(--muted)}
+  /* footer */
+  .site-footer{background:var(--sea);color:#d7e9ec;padding:64px 0 0}
+  .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1.3fr 1fr;gap:36px}
+  @media(max-width:960px){.f-grid{grid-template-columns:1fr 1fr}.f-brand{grid-column:1/-1}}
+  @media(max-width:520px){.f-grid{grid-template-columns:1fr}}
+  .f-logo{font-weight:900;font-size:28px;color:#fff;text-decoration:none}
+  .f-logo span{color:#f9c784}
+  .f-brand p{font-size:14px;margin-top:12px;color:#b9d6db;max-width:22em}
+  .site-footer h4{display:inline-block;color:#f9c784;font-size:17px;font-weight:700;padding-bottom:8px;margin-bottom:18px;border-bottom:1px solid rgba(249,199,132,.6)}
+  .site-footer ul{list-style:none}
+  .site-footer li{margin-bottom:10px;font-size:15px}
+  .site-footer a{text-decoration:none;color:#e8f4f6}
+  .site-footer a:hover{color:#f9c784}
+  .f-contact li{display:flex;flex-direction:column;line-height:1.5}
+  .f-contact span{font-size:12px;color:#8fbcc4;letter-spacing:1px}
+  .qr-box{display:grid;place-items:center;width:132px;height:132px;background:#fff;border-radius:10px;padding:8px;position:relative;overflow:hidden}
+  .qr-box img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:contain;background:#fff}
+  .qr-box span{color:var(--sea);font-size:13px;font-weight:700;text-align:center;line-height:1.5}
+  .f-bottom{margin-top:56px;border-top:1px solid rgba(255,255,255,.15);text-align:center;padding:20px;font-size:13px;color:#9cc3ca}
 </style>
 </head>
 <body>
@@ -137,7 +149,7 @@
     <div>
       <span class="tag">📍 金門在地 · 遠端也能合作</span>
       <h1>幫你的店，<br>做一個<em>好用的網站</em></h1>
-      <p class="lead">我是 Ven，電機系學生，專做店家形象網站與 Python 自動化。從需求討論到上線，一個人負責到底，溝通直接、價格透明。</p>
+      <p class="lead">我是 Ven，金門大學電機系學生，專做店家形象網站與 Python 自動化。從需求討論到上線，一個人負責到底，溝通直接、價格透明。</p>
       <div class="btns">
         <a href="#contact" class="btn btn-main">免費諮詢報價</a>
         <a href="#work" class="btn btn-ghost">看看作品</a>
@@ -234,7 +246,7 @@
     <p class="sec-sub">每一步都講清楚，不會做到一半才加價。</p>
     <div class="steps">
       <div class="step"><h4>聊需求</h4><p>LINE 或見面，聊你想要的功能和參考網站。完全免費。</p></div>
-      <div class="step"><h4>報價與訂金</h4><p>書面列出內容、修改次數、交期。確認後付 30–50% 訂金。</p></div>
+      <div class="step"><h4>報價與訂金</h4><p>書面列出內容、修改次數、交期。確認後付 30% 訂金。</p></div>
       <div class="step"><h4>製作與修改</h4><p>先給你看初版，在約定次數內修改到滿意。</p></div>
       <div class="step"><h4>上線交件</h4><p>付清尾款後正式上線，附上簡單的操作說明。</p></div>
     </div>
@@ -246,7 +258,7 @@
     <div class="avatar" aria-hidden="true">V</div>
     <div>
       <h2 class="sec-title">關於我</h2>
-      <p>我是官昱帆（Ven），國立金門大學電機工程學系學生，研究方向是控制與機器人，曾在國際研討會發表兩篇論文。課餘喜歡把生活中的小問題寫成程式解決，例如在金門搭飛機最怕起霧延誤，所以我做了 <a href="https://sd9960528-ui.github.io/kongdao/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:700">空島</a>，讓大家隨時看到尚義機場的即時航班。</p>
+      <p>我是官昱帆（Ven）國立金門大學電機工程學系學生，研究方向是控制與機器人，曾在國際研討會發表兩篇論文。課餘喜歡把生活中的小問題寫成程式解決，例如在金門搭飛機最怕起霧延誤，所以我做了 <a href="https://sd9960528-ui.github.io/kongdao/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:700">空島</a>，讓大家隨時看到尚義機場的即時航班。</p>
       <p>工程背景讓我習慣先把需求想清楚、再動手；做網站時也一樣，重點不是花俏，而是你的客人能不能很快找到他要的資訊。</p>
       <div class="facts">
         <div><b>1</b><span>上線中的即時資料網站</span></div>
@@ -257,19 +269,50 @@
   </div>
 </section>
 
-<section id="contact">
+<footer id="contact" class="site-footer">
   <div class="wrap">
-    <h2 class="sec-title">有想法？先聊聊</h2>
-    <p class="sec-sub">說說你的店和需求，我會在 24 小時內回覆，報價不收費。</p>
-    <div class="contact-box">
-      <!-- TODO: 換成你的 LINE 連結與 Email -->
-      <a href="https://line.me/ti/p/你的LINE ID" target="_blank" rel="noopener">LINE 聯絡</a>
-      <a href="mailto:你的信箱@example.com" class="alt">寄 Email</a>
+    <div class="f-grid">
+      <div class="f-brand">
+        <a href="#" class="f-logo">Ven<span>.</span></a>
+        <p>金門在地的網站製作與 Python 自動化接案。有想法嗎？先聊聊，報價免費，24 小時內回覆。</p>
+      </div>
+      <div>
+        <h4>服務項目</h4>
+        <ul>
+          <li><a href="#services">店家形象網站</a></li>
+          <li><a href="#services">Python 自動化</a></li>
+          <li><a href="#services">網站維護</a></li>
+          <li><a href="#process">合作流程</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>作品</h4>
+        <ul>
+          <!-- TODO: 確認空島網址 -->
+          <li><a href="https://sd9960528-ui.github.io/kongdao/" target="_blank" rel="noopener">空島｜金門機場即時航班</a></li>
+          <li><a href="https://github.com/sd9960528-ui" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>聯絡方式</h4>
+        <ul class="f-contact">
+          <!-- TODO: 換成你的 Email -->
+          <li><span>LINE ID</span>as99605280</li>
+          <li><span>Email</span>sd9960528@gmail.com</li>
+          <li><span>地區</span>金門 · 可遠端合作</li>
+        </ul>
+      </div>
+      <div class="f-qr">
+        <h4>加入 LINE 好友</h4>
+                <a href="https://line.me/ti/p/eT_zkc4dUc" target="_blank" rel="noopener" class="qr-box">
+          <img src="line-qr.png" alt="LINE QR 碼" onerror="this.remove()">
+          <span>點擊<br>加入 LINE</span>
+        </a>
+      </div>
     </div>
   </div>
-</section>
-
-<footer>© 2026 Ven 官昱帆 · 金門</footer>
+  <div class="f-bottom">© 2026 Ven 官昱帆 · 金門</div>
+</footer>
 
 </body>
 </html>
