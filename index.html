@@ -81,11 +81,9 @@
   .links a{font-weight:700;color:var(--sea);margin-right:18px;text-decoration:none;border-bottom:2px solid #f9c784}
 
   /* kongdao mock */
-  .map{background:radial-gradient(circle at 70% 40%,#cfe6ea 0 18%,transparent 19%),linear-gradient(160deg,#a9d3db,#6fb3c1)}
-  .island{position:absolute;left:52%;top:34%;width:34%;height:26%;background:#efe3cc;border-radius:46% 54% 40% 60%/55% 40% 60% 45%;transform:rotate(-12deg);box-shadow:inset 0 -6px 0 #e2d0ad}
-  .route{position:absolute;left:8%;top:72%;width:60%;height:2px;border-top:2px dashed rgba(15,76,92,.55);transform:rotate(-24deg);transform-origin:left}
-  .plane{position:absolute;font-size:26px;left:30%;top:52%;transform:rotate(-24deg);animation:fly 6s ease-in-out infinite}
-  @keyframes fly{0%{left:10%;top:68%}100%{left:58%;top:40%}}
+  .kmap{background:#8fc3cd}
+  .kmap svg{position:absolute;inset:0;width:100%;height:100%}
+  .kmap .board{top:14px;left:14px;right:auto;bottom:auto;width:48%}
   .board{position:absolute;right:14px;bottom:14px;left:14px;background:rgba(20,35,43,.9);color:#e8f4f6;border-radius:12px;padding:12px 14px;font-family:"JetBrains Mono",monospace;font-size:12px}
   .board div{display:flex;justify-content:space-between;padding:3px 0}
 
@@ -148,8 +146,8 @@
   <div class="wrap">
     <div>
       <span class="tag">📍 金門在地 · 遠端也能合作</span>
-      <h1>幫你的店，<br>做一個<em>好用的網站</em></h1>
-      <p class="lead">我是 Ven，金門大學電機系學生，專做店家形象網站與 Python 自動化。從需求討論到上線，一個人負責到底，溝通直接、價格透明。</p>
+      <h1>幫你的店<br>做一個<em>好用的網站</em></h1>
+      <p class="lead">我是 Ven 金門大學電機系學生，專做店家形象網站與 Python 自動化。從需求討論到上線，一個人負責到底，溝通直接、價格透明。</p>
       <div class="btns">
         <a href="#contact" class="btn btn-main">免費諮詢報價</a>
         <a href="#work" class="btn btn-ghost">看看作品</a>
@@ -157,9 +155,9 @@
     </div>
     <div class="hero-card" aria-hidden="true">
       <div class="head">KNH 尚義機場 · 即時看板（空島）</div>
-      <div class="row"><span>B7 8xx 台北</span><b class="ok">已抵達</b></div>
-      <div class="row"><span>AE 1xxx 台中</span><b>準時</b></div>
-      <div class="row"><span>B7 8xx 高雄</span><b class="warn">延誤 20 分</b></div>
+      <div class="row"><span>AE 1276 台北</span><b class="ok">已抵達</b></div>
+      <div class="row"><span>AE 770 台中</span><b>準時</b></div>
+      <div class="row"><span>B7 8928 高雄</span><b class="warn">延誤 20 分</b></div>
       <div class="row"><span>能見度</span><b>800 m · 起霧注意</b></div>
     </div>
   </div>
@@ -213,10 +211,28 @@
     <p class="sec-sub">實際做出來、正在運作的東西。</p>
 
     <div class="work">
-      <div class="shot map" aria-hidden="true">
-        <div class="island"></div>
-        <div class="route"></div>
-        <div class="plane">✈️</div>
+      <div class="shot kmap" aria-hidden="true">
+        <svg viewBox="80 0 820 615" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="ksea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cfe8ec"/><stop offset="1" stop-color="#8fc3cd"/>
+            </linearGradient>
+          </defs>
+          <rect x="80" y="0" width="820" height="615" fill="url(#ksea)"/>
+          <path d="M3,538 L4,544 L8,544 L10,546 L10,548 L13,549 L22,548 L26,544 L32,543 L32,540 L31,540 L30,543 L26,543 L25,544 L16,543 L13,539 L9,536Z M22,499 L18,504 L18,507 L24,511 L28,516 L28,520 L25,524 L30,523 L32,524 L37,530 L41,532 L50,529 L52,527 L54,521 L51,521 L50,520 L40,521 L34,519 L31,516 L30,513 L30,507 L33,503 L33,500 L25,500Z M104,495 L104,496 L106,498 L108,498 L109,500 L113,500 L111,493 L107,493Z M879,331 L876,329 L874,329 L868,334 L864,334 L863,333 L863,329 L864,328 L863,321 L864,319 L862,319 L860,322 L857,322 L853,320 L846,313 L842,307 L836,289 L836,269 L835,268 L835,263 L837,260 L837,249 L842,246 L842,245 L848,240 L853,240 L853,237 L849,234 L849,232 L847,230 L843,232 L841,232 L840,230 L838,230 L833,235 L827,235 L823,233 L817,226 L814,219 L813,211 L811,206 L814,193 L813,191 L805,189 L800,185 L798,182 L797,174 L795,171 L797,159 L800,156 L800,148 L798,148 L797,150 L795,150 L788,147 L783,147 L778,150 L775,150 L772,148 L764,148 L762,146 L756,146 L748,137 L742,125 L741,117 L744,113 L743,110 L738,108 L734,104 L734,101 L736,100 L739,96 L738,95 L730,97 L726,94 L726,89 L725,89 L723,93 L720,93 L716,90 L704,95 L704,98 L703,99 L698,99 L693,95 L693,91 L688,86 L686,86 L683,90 L683,93 L687,98 L687,106 L688,109 L686,114 L686,120 L688,122 L688,125 L683,128 L678,128 L673,132 L669,137 L662,141 L659,141 L658,140 L651,141 L649,140 L643,143 L642,145 L643,160 L642,161 L641,174 L639,181 L645,183 L650,194 L649,201 L647,205 L643,209 L639,211 L635,211 L635,214 L632,217 L629,217 L630,220 L630,224 L627,226 L613,226 L609,224 L605,224 L606,227 L617,239 L616,253 L614,259 L602,272 L602,278 L596,285 L595,289 L591,293 L588,294 L574,293 L564,288 L559,288 L552,286 L545,281 L540,281 L539,280 L535,280 L533,282 L527,281 L521,276 L514,274 L492,262 L459,234 L451,225 L437,213 L431,211 L426,206 L418,205 L416,207 L416,211 L413,214 L402,214 L395,218 L392,223 L388,226 L388,228 L382,234 L370,235 L364,242 L364,246 L359,251 L358,260 L354,264 L356,268 L361,273 L369,275 L373,280 L380,284 L385,284 L393,292 L392,301 L390,304 L396,316 L395,319 L393,320 L369,320 L368,321 L363,321 L362,322 L355,323 L347,326 L336,327 L335,328 L300,329 L299,330 L291,331 L284,334 L280,337 L277,337 L266,330 L259,322 L254,319 L248,319 L245,316 L243,317 L236,317 L233,320 L230,320 L225,328 L221,328 L220,327 L200,328 L192,335 L192,340 L189,345 L189,364 L187,371 L187,380 L184,387 L177,395 L173,397 L162,397 L158,399 L158,404 L164,416 L164,425 L159,428 L159,431 L157,434 L157,436 L152,441 L148,442 L145,440 L142,441 L147,447 L151,449 L165,449 L171,451 L174,454 L175,458 L180,463 L182,463 L190,448 L203,436 L210,433 L222,433 L224,435 L224,443 L225,443 L238,434 L242,429 L242,428 L238,425 L239,418 L249,407 L258,403 L268,402 L271,404 L271,407 L272,408 L272,411 L270,413 L272,412 L284,412 L285,403 L288,400 L293,400 L295,401 L290,399 L286,401 L283,400 L283,398 L289,391 L289,386 L287,384 L286,376 L287,374 L296,366 L296,363 L294,360 L294,354 L297,350 L296,347 L291,346 L285,341 L286,338 L299,333 L342,331 L343,330 L352,329 L356,327 L368,325 L369,324 L398,323 L400,325 L405,335 L412,354 L412,383 L409,385 L410,388 L409,393 L402,398 L395,398 L391,396 L387,396 L388,401 L386,403 L368,403 L368,404 L380,404 L385,407 L385,410 L382,411 L382,422 L380,424 L358,424 L357,423 L357,415 L356,428 L354,430 L350,430 L349,428 L349,431 L348,432 L330,432 L329,433 L326,433 L325,439 L329,444 L333,446 L338,451 L351,460 L356,462 L360,466 L361,468 L360,473 L368,477 L374,483 L375,485 L375,491 L390,491 L391,492 L399,493 L403,497 L403,499 L405,499 L406,502 L410,504 L410,507 L413,509 L420,508 L421,509 L428,510 L430,511 L432,514 L436,515 L441,521 L453,523 L454,521 L458,518 L462,518 L466,516 L471,516 L472,515 L472,511 L475,505 L485,496 L487,483 L496,461 L505,451 L510,448 L510,443 L513,435 L520,428 L523,423 L546,405 L583,386 L618,373 L623,373 L624,372 L631,373 L632,372 L638,372 L644,370 L649,370 L652,372 L664,372 L668,374 L670,377 L672,378 L677,378 L680,380 L684,380 L686,382 L688,387 L688,394 L696,393 L700,396 L707,395 L713,398 L726,402 L734,406 L741,414 L745,415 L750,420 L751,422 L752,439 L747,441 L740,441 L730,447 L737,444 L739,442 L743,442 L744,441 L753,441 L755,447 L744,453 L739,453 L737,451 L735,451 L734,452 L735,453 L735,456 L734,457 L731,457 L727,455 L731,458 L736,458 L737,459 L740,458 L748,458 L753,455 L761,455 L763,452 L773,451 L773,447 L775,445 L782,446 L786,444 L787,442 L790,441 L790,438 L793,437 L794,435 L798,432 L807,433 L809,432 L810,429 L815,429 L815,426 L817,425 L814,415 L814,411 L816,407 L822,402 L825,402 L827,404 L827,406 L830,406 L833,403 L834,400 L836,398 L838,398 L842,393 L842,389 L840,388 L840,385 L837,383 L837,381 L838,380 L841,380 L842,378 L840,376 L835,375 L833,372 L834,365 L838,362 L837,359 L842,355 L848,355 L850,359 L857,358 L859,355 L863,352 L863,346 L866,344 L865,342 L866,338 L876,332 L879,332Z M702,16 L692,12 L689,13 L689,14 L684,18 L684,25 L680,28 L677,28 L676,30 L673,32 L676,34 L679,34 L681,32 L683,32 L686,27 L686,23 L694,17 L701,17Z" fill="#f3e6cc" stroke="#d6bf94" stroke-width="2.5" stroke-linejoin="round"/>
+          <g font-size="22" fill="#9a8458" font-family="Noto Sans TC, sans-serif">
+            <text x="200" y="385">烈嶼</text><text x="440" y="315">金寧</text><text x="380" y="470">金城</text>
+            <text x="690" y="225">金沙</text><text x="740" y="315">金湖</text>
+          </g>
+          <path id="kroute" d="M910,560 Q760,480 552,390" fill="none" stroke="#0f4c5c" stroke-width="3.5" stroke-dasharray="10 10" opacity=".55"/>
+          <circle cx="548" cy="388" r="14" fill="#e36414" opacity=".25"><animate attributeName="r" values="10;26;10" dur="2.4s" repeatCount="indefinite"/></circle>
+          <circle cx="548" cy="388" r="9" fill="#e36414"/>
+          <text x="630" y="448" font-size="22" font-weight="700" fill="#0f4c5c" font-family="Noto Sans TC, sans-serif" text-anchor="middle">KNH 尚義機場</text>
+          <g>
+            <path d="M-18,0 L18,0 M0,0 L-10,-14 M0,0 L-10,14 M-16,0 L-22,-6 M-16,0 L-22,6" stroke="#0f4c5c" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".4 0 .2 1"><mpath href="#kroute"/></animateMotion>
+          </g>
+        </svg>
         <div class="board">
           <div><span>今日航班</span><span>準點率 92%</span></div>
           <div><span>下一班抵達</span><span>14:35 台北</span></div>
