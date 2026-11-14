@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ven 官昱帆｜網站製作 · Python 自動化接案</title>
+<meta name="description" content="金門在地的網站製作與 Python 自動化接案。一頁式形象網站、店家網站、報表自動化、資料爬取。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sea:#0f4c5c; --sea-2:#1b6f80; --sky:#e6f2f4; --sand:#f6efe4; --sand-2:#eadcc6;
+    --ink:#14232b; --muted:#5b6b73; --accent:#e36414; --line:#d8e2e5; --card:#ffffff;
+    --radius:16px; --max:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Noto Sans TC",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;color:var(--ink);background:var(--sand);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(246,239,228,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--sand-2)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:20px;letter-spacing:.5px;text-decoration:none}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:28px;list-style:none}
+  nav ul a{text-decoration:none;color:var(--muted);font-weight:500;font-size:15px}
+  nav ul a:hover{color:var(--sea)}
+  .nav-cta{background:var(--sea);color:#fff!important;padding:8px 16px;border-radius:999px}
+  @media(max-width:720px){nav ul li:not(:last-child){display:none}}
+
+  /* hero */
+  .hero{padding:88px 0 72px;position:relative;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+  .tag{display:inline-block;font-size:13px;font-weight:700;color:var(--sea);background:var(--sky);padding:6px 12px;border-radius:999px;margin-bottom:20px}
+  h1{font-size:clamp(34px,5vw,54px);line-height:1.2;font-weight:900;margin-bottom:20px}
+  h1 em{font-style:normal;color:var(--sea);background:linear-gradient(transparent 62%,#f9c784 62%)}
+  .lead{font-size:18px;color:var(--muted);max-width:34em;margin-bottom:32px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:700;text-decoration:none;transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-main{background:var(--accent);color:#fff}
+  .btn-ghost{border:2px solid var(--sea);color:var(--sea)}
+  .hero-card{background:var(--sea);color:#e8f4f6;border-radius:24px;padding:28px;font-family:"JetBrains Mono",monospace;font-size:14px;box-shadow:0 20px 40px -20px rgba(15,76,92,.6)}
+  .hero-card .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.18)}
+  .hero-card .row:last-child{border:none}
+  .hero-card b{color:#f9c784;font-weight:500}
+  .hero-card .head{font-size:12px;opacity:.7;margin-bottom:8px;letter-spacing:1px}
+  .ok{color:#8ce99a}.warn{color:#ffd166}
+  @media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero{padding:56px 0}}
+
+  section{padding:80px 0}
+  .sec-title{font-size:clamp(26px,3.4vw,36px);font-weight:900;margin-bottom:8px}
+  .sec-sub{color:var(--muted);margin-bottom:40px}
+
+  /* services */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:860px){.grid3{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column}
+  .icon{width:48px;height:48px;border-radius:12px;background:var(--sky);display:grid;place-items:center;font-size:24px;margin-bottom:16px}
+  .card h3{font-size:20px;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:15px;flex:1}
+  .card ul{margin:14px 0 18px 1.1em;color:var(--muted);font-size:14px}
+  .price{font-weight:900;color:var(--sea);font-size:18px;border-top:1px solid var(--line);padding-top:14px}
+  .price small{font-weight:500;color:var(--muted);font-size:13px}
+
+  /* work */
+  #work{background:#fff}
+  .work{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:64px}
+  .work:last-child{margin-bottom:0}
+  .work.rev .shot{order:2}
+  @media(max-width:860px){.work{grid-template-columns:1fr}.work.rev .shot{order:0}}
+  .shot{border-radius:20px;aspect-ratio:4/3;position:relative;overflow:hidden;border:1px solid var(--line)}
+  .work h3{font-size:26px;font-weight:900;margin-bottom:6px}
+  .work .kicker{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:8px}
+  .work p{color:var(--muted);margin-bottom:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .chip{font-size:13px;background:var(--sky);color:var(--sea);padding:4px 10px;border-radius:999px;font-weight:500}
+  .links a{font-weight:700;color:var(--sea);margin-right:18px;text-decoration:none;border-bottom:2px solid #f9c784}
+
+  /* kongdao mock */
+  .kmap{background:#8fc3cd}
+  .kmap svg{position:absolute;inset:0;width:100%;height:100%}
+  .kmap .board{top:14px;left:14px;right:auto;bottom:auto;width:48%}
+  .board{position:absolute;right:14px;bottom:14px;left:14px;background:rgba(20,35,43,.9);color:#e8f4f6;border-radius:12px;padding:12px 14px;font-family:"JetBrains Mono",monospace;font-size:12px}
+  .board div{display:flex;justify-content:space-between;padding:3px 0}
+
+
+
+  /* process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+  @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+  .step{background:#fff;border-radius:var(--radius);padding:24px;border:1px solid var(--line);counter-increment:s}
+  .step::before{content:"0" counter(s);font-family:"JetBrains Mono",monospace;color:var(--accent);font-size:14px;display:block;margin-bottom:8px}
+  .step h4{font-size:17px;margin-bottom:6px}
+  .step p{font-size:14px;color:var(--muted)}
+
+  /* about */
+  .about{display:grid;grid-template-columns:.7fr 1.3fr;gap:48px;align-items:center}
+  @media(max-width:860px){.about{grid-template-columns:1fr}}
+  .avatar{aspect-ratio:1;border-radius:24px;background:var(--sea);display:grid;place-items:center;color:#f9c784;font-size:72px;font-weight:900}
+  .about p{color:var(--muted);margin-bottom:14px}
+  .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:20px}
+  .facts b{display:block;font-size:24px;color:var(--sea)}
+  .facts span{font-size:13px;color:var(--muted)}
+
+  /* footer */
+  .site-footer{background:var(--sea);color:#d7e9ec;padding:64px 0 0}
+  .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1.3fr 1fr;gap:36px}
+  @media(max-width:960px){.f-grid{grid-template-columns:1fr 1fr}.f-brand{grid-column:1/-1}}
+  @media(max-width:520px){.f-grid{grid-template-columns:1fr}}
+  .f-logo{font-weight:900;font-size:28px;color:#fff;text-decoration:none}
+  .f-logo span{color:#f9c784}
+  .f-brand p{font-size:14px;margin-top:12px;color:#b9d6db;max-width:22em}
+  .site-footer h4{display:inline-block;color:#f9c784;font-size:17px;font-weight:700;padding-bottom:8px;margin-bottom:18px;border-bottom:1px solid rgba(249,199,132,.6)}
+  .site-footer ul{list-style:none}
+  .site-footer li{margin-bottom:10px;font-size:15px}
+  .site-footer a{text-decoration:none;color:#e8f4f6}
+  .site-footer a:hover{color:#f9c784}
+  .f-contact li{display:flex;flex-direction:column;line-height:1.5}
+  .f-contact span{font-size:12px;color:#8fbcc4;letter-spacing:1px}
+  .qr-box{display:grid;place-items:center;width:132px;height:132px;background:#fff;border-radius:10px;padding:8px;position:relative;overflow:hidden}
+  .qr-box img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:contain;background:#fff}
+  .qr-box span{color:var(--sea);font-size:13px;font-weight:700;text-align:center;line-height:1.5}
+  .f-bottom{margin-top:56px;border-top:1px solid rgba(255,255,255,.15);text-align:center;padding:20px;font-size:13px;color:#9cc3ca}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo">Ven<span>.</span></a>
+    <ul>
+      <li><a href="#services">服務</a></li>
+      <li><a href="#work">作品</a></li>
+      <li><a href="#process">流程</a></li>
+      <li><a href="#about">關於我</a></li>
+      <li><a href="#contact" class="nav-cta">聯絡我</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="tag">📍 金門在地 · 遠端也能合作</span>
+      <h1>幫你的店<br>做一個<em>好用的網站</em></h1>
+      <p class="lead">我是 Ven 金門大學電機系學生，專做店家形象網站與 Python 自動化。從需求討論到上線，一個人負責到底，溝通直接、價格透明。</p>
+      <div class="btns">
+        <a href="#contact" class="btn btn-main">免費諮詢報價</a>
+        <a href="#work" class="btn btn-ghost">看看作品</a>
+      </div>
+    </div>
+    <div class="hero-card" aria-hidden="true">
+      <div class="head">KNH 尚義機場 · 即時看板（空島）</div>
+      <div class="row"><span>AE 1276 台北</span><b class="ok">已抵達</b></div>
+      <div class="row"><span>AE 770 台中</span><b>準時</b></div>
+      <div class="row"><span>B7 8928 高雄</span><b class="warn">延誤 20 分</b></div>
+      <div class="row"><span>能見度</span><b>800 m · 起霧注意</b></div>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <h2 class="sec-title">我可以幫你做什麼</h2>
+    <p class="sec-sub">小規模、說得清楚、做得完的案子，最適合找我。</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="icon">🏠</div>
+        <h3>店家形象網站</h3>
+        <p>民宿、餐廳、特產店、工作室的一頁式或多頁網站，手機看也漂亮。</p>
+        <ul>
+          <li>RWD 手機版、Google 地圖、LINE 按鈕</li>
+          <li>Google 商家檔案設定</li>
+          <li>免費主機上線（GitHub Pages）</li>
+        </ul>
+        <div class="price">NT$ 5,000 起 <small>· 依頁數功能報價</small></div>
+      </div>
+      <div class="card">
+        <div class="icon">🐍</div>
+        <h3>Python 自動化</h3>
+        <p>每週重複做的雜事交給程式：報表整理、資料抓取、檔案批次處理。</p>
+        <ul>
+          <li>Excel / CSV 報表自動彙整</li>
+          <li>網頁公開資料擷取與整理</li>
+          <li>LINE 通知、排程小工具</li>
+        </ul>
+        <div class="price">NT$ 2,000 起 <small>· 依複雜度報價</small></div>
+      </div>
+      <div class="card">
+        <div class="icon">🔧</div>
+        <h3>網站維護</h3>
+        <p>做好之後不用擔心，菜單、房價、照片要改，傳 LINE 給我就好。</p>
+        <ul>
+          <li>內容與圖片更新</li>
+          <li>基本安全檢查（HTTPS、表單防護）</li>
+          <li>網址與主機續約提醒</li>
+        </ul>
+        <div class="price">NT$ 500 / 月起 <small>· 可隨時停止</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <h2 class="sec-title">作品</h2>
+    <p class="sec-sub">實際做出來、正在運作的東西。</p>
+
+    <div class="work">
+      <div class="shot kmap" aria-hidden="true">
+        <svg viewBox="80 0 820 615" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="ksea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cfe8ec"/><stop offset="1" stop-color="#8fc3cd"/>
+            </linearGradient>
+          </defs>
+          <rect x="80" y="0" width="820" height="615" fill="url(#ksea)"/>
+          <path d="M3,538 L4,544 L8,544 L10,546 L10,548 L13,549 L22,548 L26,544 L32,543 L32,540 L31,540 L30,543 L26,543 L25,544 L16,543 L13,539 L9,536Z M22,499 L18,504 L18,507 L24,511 L28,516 L28,520 L25,524 L30,523 L32,524 L37,530 L41,532 L50,529 L52,527 L54,521 L51,521 L50,520 L40,521 L34,519 L31,516 L30,513 L30,507 L33,503 L33,500 L25,500Z M104,495 L104,496 L106,498 L108,498 L109,500 L113,500 L111,493 L107,493Z M879,331 L876,329 L874,329 L868,334 L864,334 L863,333 L863,329 L864,328 L863,321 L864,319 L862,319 L860,322 L857,322 L853,320 L846,313 L842,307 L836,289 L836,269 L835,268 L835,263 L837,260 L837,249 L842,246 L842,245 L848,240 L853,240 L853,237 L849,234 L849,232 L847,230 L843,232 L841,232 L840,230 L838,230 L833,235 L827,235 L823,233 L817,226 L814,219 L813,211 L811,206 L814,193 L813,191 L805,189 L800,185 L798,182 L797,174 L795,171 L797,159 L800,156 L800,148 L798,148 L797,150 L795,150 L788,147 L783,147 L778,150 L775,150 L772,148 L764,148 L762,146 L756,146 L748,137 L742,125 L741,117 L744,113 L743,110 L738,108 L734,104 L734,101 L736,100 L739,96 L738,95 L730,97 L726,94 L726,89 L725,89 L723,93 L720,93 L716,90 L704,95 L704,98 L703,99 L698,99 L693,95 L693,91 L688,86 L686,86 L683,90 L683,93 L687,98 L687,106 L688,109 L686,114 L686,120 L688,122 L688,125 L683,128 L678,128 L673,132 L669,137 L662,141 L659,141 L658,140 L651,141 L649,140 L643,143 L642,145 L643,160 L642,161 L641,174 L639,181 L645,183 L650,194 L649,201 L647,205 L643,209 L639,211 L635,211 L635,214 L632,217 L629,217 L630,220 L630,224 L627,226 L613,226 L609,224 L605,224 L606,227 L617,239 L616,253 L614,259 L602,272 L602,278 L596,285 L595,289 L591,293 L588,294 L574,293 L564,288 L559,288 L552,286 L545,281 L540,281 L539,280 L535,280 L533,282 L527,281 L521,276 L514,274 L492,262 L459,234 L451,225 L437,213 L431,211 L426,206 L418,205 L416,207 L416,211 L413,214 L402,214 L395,218 L392,223 L388,226 L388,228 L382,234 L370,235 L364,242 L364,246 L359,251 L358,260 L354,264 L356,268 L361,273 L369,275 L373,280 L380,284 L385,284 L393,292 L392,301 L390,304 L396,316 L395,319 L393,320 L369,320 L368,321 L363,321 L362,322 L355,323 L347,326 L336,327 L335,328 L300,329 L299,330 L291,331 L284,334 L280,337 L277,337 L266,330 L259,322 L254,319 L248,319 L245,316 L243,317 L236,317 L233,320 L230,320 L225,328 L221,328 L220,327 L200,328 L192,335 L192,340 L189,345 L189,364 L187,371 L187,380 L184,387 L177,395 L173,397 L162,397 L158,399 L158,404 L164,416 L164,425 L159,428 L159,431 L157,434 L157,436 L152,441 L148,442 L145,440 L142,441 L147,447 L151,449 L165,449 L171,451 L174,454 L175,458 L180,463 L182,463 L190,448 L203,436 L210,433 L222,433 L224,435 L224,443 L225,443 L238,434 L242,429 L242,428 L238,425 L239,418 L249,407 L258,403 L268,402 L271,404 L271,407 L272,408 L272,411 L270,413 L272,412 L284,412 L285,403 L288,400 L293,400 L295,401 L290,399 L286,401 L283,400 L283,398 L289,391 L289,386 L287,384 L286,376 L287,374 L296,366 L296,363 L294,360 L294,354 L297,350 L296,347 L291,346 L285,341 L286,338 L299,333 L342,331 L343,330 L352,329 L356,327 L368,325 L369,324 L398,323 L400,325 L405,335 L412,354 L412,383 L409,385 L410,388 L409,393 L402,398 L395,398 L391,396 L387,396 L388,401 L386,403 L368,403 L368,404 L380,404 L385,407 L385,410 L382,411 L382,422 L380,424 L358,424 L357,423 L357,415 L356,428 L354,430 L350,430 L349,428 L349,431 L348,432 L330,432 L329,433 L326,433 L325,439 L329,444 L333,446 L338,451 L351,460 L356,462 L360,466 L361,468 L360,473 L368,477 L374,483 L375,485 L375,491 L390,491 L391,492 L399,493 L403,497 L403,499 L405,499 L406,502 L410,504 L410,507 L413,509 L420,508 L421,509 L428,510 L430,511 L432,514 L436,515 L441,521 L453,523 L454,521 L458,518 L462,518 L466,516 L471,516 L472,515 L472,511 L475,505 L485,496 L487,483 L496,461 L505,451 L510,448 L510,443 L513,435 L520,428 L523,423 L546,405 L583,386 L618,373 L623,373 L624,372 L631,373 L632,372 L638,372 L644,370 L649,370 L652,372 L664,372 L668,374 L670,377 L672,378 L677,378 L680,380 L684,380 L686,382 L688,387 L688,394 L696,393 L700,396 L707,395 L713,398 L726,402 L734,406 L741,414 L745,415 L750,420 L751,422 L752,439 L747,441 L740,441 L730,447 L737,444 L739,442 L743,442 L744,441 L753,441 L755,447 L744,453 L739,453 L737,451 L735,451 L734,452 L735,453 L735,456 L734,457 L731,457 L727,455 L731,458 L736,458 L737,459 L740,458 L748,458 L753,455 L761,455 L763,452 L773,451 L773,447 L775,445 L782,446 L786,444 L787,442 L790,441 L790,438 L793,437 L794,435 L798,432 L807,433 L809,432 L810,429 L815,429 L815,426 L817,425 L814,415 L814,411 L816,407 L822,402 L825,402 L827,404 L827,406 L830,406 L833,403 L834,400 L836,398 L838,398 L842,393 L842,389 L840,388 L840,385 L837,383 L837,381 L838,380 L841,380 L842,378 L840,376 L835,375 L833,372 L834,365 L838,362 L837,359 L842,355 L848,355 L850,359 L857,358 L859,355 L863,352 L863,346 L866,344 L865,342 L866,338 L876,332 L879,332Z M702,16 L692,12 L689,13 L689,14 L684,18 L684,25 L680,28 L677,28 L676,30 L673,32 L676,34 L679,34 L681,32 L683,32 L686,27 L686,23 L694,17 L701,17Z" fill="#f3e6cc" stroke="#d6bf94" stroke-width="2.5" stroke-linejoin="round"/>
+          <g font-size="22" fill="#9a8458" font-family="Noto Sans TC, sans-serif">
+            <text x="200" y="385">烈嶼</text><text x="440" y="315">金寧</text><text x="380" y="470">金城</text>
+            <text x="690" y="225">金沙</text><text x="740" y="315">金湖</text>
+          </g>
+          <path id="kroute" d="M910,560 Q760,480 552,390" fill="none" stroke="#0f4c5c" stroke-width="3.5" stroke-dasharray="10 10" opacity=".55"/>
+          <circle cx="548" cy="388" r="14" fill="#e36414" opacity=".25"><animate attributeName="r" values="10;26;10" dur="2.4s" repeatCount="indefinite"/></circle>
+          <circle cx="548" cy="388" r="9" fill="#e36414"/>
+          <text x="630" y="448" font-size="22" font-weight="700" fill="#0f4c5c" font-family="Noto Sans TC, sans-serif" text-anchor="middle">KNH 尚義機場</text>
+          <g>
+            <path d="M-18,0 L18,0 M0,0 L-10,-14 M0,0 L-10,14 M-16,0 L-22,-6 M-16,0 L-22,6" stroke="#0f4c5c" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".4 0 .2 1"><mpath href="#kroute"/></animateMotion>
+          </g>
+        </svg>
+        <div class="board">
+          <div><span>今日航班</span><span>準點率 92%</span></div>
+          <div><span>下一班抵達</span><span>14:35 台北</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="kicker">網站 · 即時資料</div>
+        <h3>空島 — 金門尚義機場即時航班地圖</h3>
+        <p>把金門機場的航班變成一張會動的地圖。串接交通部 TDX 即時航班資料，自動判定延誤，並加入中央氣象署的能見度資訊，冬天起霧時一眼就知道航班狀況。</p>
+        <div class="chips">
+          <span class="chip">TDX API</span><span class="chip">Cloudflare Workers</span><span class="chip">JavaScript</span><span class="chip">GitHub Pages</span><span class="chip">RWD 手機版</span>
+        </div>
+        <p style="font-size:14px">✔ 即時航班看板 ✔ 今日統計 ✔ 起霧警示 ✔ 手機底部面板<br>✔ 後端代理保護 API 金鑰，不外洩在網頁中</p>
+        <div class="links">
+          <!-- TODO: 換成空島實際網址與 repo -->
+          <a href="https://sd9960528-ui.github.io/kongdao/" target="_blank" rel="noopener">開啟網站 →</a>
+          <a href="https://github.com/sd9960528-ui/kongdao" target="_blank" rel="noopener">原始碼</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <h2 class="sec-title">合作流程</h2>
+    <p class="sec-sub">每一步都講清楚，不會做到一半才加價。</p>
+    <div class="steps">
+      <div class="step"><h4>聊需求</h4><p>LINE 或見面，聊你想要的功能和參考網站。完全免費。</p></div>
+      <div class="step"><h4>報價與訂金</h4><p>書面列出內容、修改次數、交期。確認後付 30% 訂金。</p></div>
+      <div class="step"><h4>製作與修改</h4><p>先給你看初版，在約定次數內修改到滿意。</p></div>
+      <div class="step"><h4>上線交件</h4><p>付清尾款後正式上線，附上簡單的操作說明。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:#fff">
+  <div class="wrap about">
+    <div class="avatar" aria-hidden="true">V</div>
+    <div>
+      <h2 class="sec-title">關於我</h2>
+      <p>我是官昱帆（Ven）國立金門大學電機工程學系學生，研究方向是控制與機器人，曾在國際研討會發表兩篇論文。課餘喜歡把生活中的小問題寫成程式解決，例如在金門搭飛機最怕起霧延誤，所以我做了 <a href="https://sd9960528-ui.github.io/kongdao/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:700">空島</a>，讓大家隨時看到尚義機場的即時航班。</p>
+      <p>工程背景讓我習慣先把需求想清楚、再動手；做網站時也一樣，重點不是花俏，而是你的客人能不能很快找到他要的資訊。</p>
+      <div class="facts">
+        <div><b>1</b><span>上線中的即時資料網站</span></div>
+        <div><b>2</b><span>篇國際研討會論文</span></div>
+        <div><b>24h</b><span>內回覆訊息</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact" class="site-footer">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <a href="#" class="f-logo">Ven<span>.</span></a>
+        <p>金門在地的網站製作與 Python 自動化接案。有想法嗎？先聊聊，報價免費，24 小時內回覆。</p>
+      </div>
+      <div>
+        <h4>服務項目</h4>
+        <ul>
+          <li><a href="#services">店家形象網站</a></li>
+          <li><a href="#services">Python 自動化</a></li>
+          <li><a href="#services">網站維護</a></li>
+          <li><a href="#process">合作流程</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>作品</h4>
+        <ul>
+          <!-- TODO: 確認空島網址 -->
+          <li><a href="https://sd9960528-ui.github.io/kongdao/" target="_blank" rel="noopener">空島｜金門機場即時航班</a></li>
+          <li><a href="https://github.com/sd9960528-ui" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>聯絡方式</h4>
+        <ul class="f-contact">
+          <!-- TODO: 換成你的 Email -->
+          <li><span>LINE ID</span>as99605280</li>
+          <li><span>Email</span>sd9960528@gmail.com</li>
+          <li><span>地區</span>金門 · 可遠端合作</li>
+        </ul>
+      </div>
+      <div class="f-qr">
+        <h4>加入 LINE 好友</h4>
+                <a href="https://line.me/ti/p/eT_zkc4dUc" target="_blank" rel="noopener" class="qr-box">
+          <img src="line-qr.png" alt="LINE QR 碼" onerror="this.remove()">
+          <span>點擊<br>加入 LINE</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="f-bottom">© 2026 Ven 官昱帆 · 金門</div>
+</footer>
+
+</body>
+</html>
